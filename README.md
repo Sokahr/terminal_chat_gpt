@@ -22,20 +22,20 @@ Within this directory, we'll create a virtual environment. This environment is a
 
 ```bash
 # For Mac/Linux
-python3 -m venv venv
+python3 -m venv .venv
 
 # For Windows
-python -m venv venv
+python -m venv .venv
 ```
 
 Activate the virtual environment:
 
 ```bash
 # For Mac/Linux
-source venv/bin/activate
+source .venv/bin/activate
 
 # For Windows
-.\venv\Scripts\activate
+.\.venv\Scripts\activate
 ```
 
 ## Step 2: Managing Dependencies
