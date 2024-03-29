@@ -1,6 +1,10 @@
-# Building a Streaming ChatGPT Terminal Application with Python
+# Building a ChatGPT Terminal Application with Python
 
-Creating a streaming ChatGPT terminal application allows you to interact with the powerful capabilities of OpenAI's ChatGPT directly from your terminal, no matter if you're on Mac, Linux, or Windows. This blog post will guide you through the process of building this application, step by step. Whether you're a seasoned developer or just starting, you'll find these instructions easy to follow.
+Creating a ChatGPT terminal application allows you 
+to interact with the powerful capabilities of OpenAI's ChatGPT directly from your terminal, 
+no matter if you're on Mac, Linux, or Windows. 
+This blog post will guide you through the process of building this application, step by step.
+Whether you're a seasoned developer or just starting, you'll find these instructions easy to follow.
 
 ## Prerequisites
 
@@ -18,7 +22,9 @@ mkdir terminal_chat_gpt
 cd terminal_chat_gpt
 ```
 
-Within this directory, we'll create a virtual environment. This environment is a self-contained directory that contains a Python installation for a particular version of Python, plus a number of additional packages.
+Within this directory, we'll create a virtual environment. 
+This environment is a self-contained directory that contains a Python installation for a particular version of Python, 
+plus a number of additional packages.
 
 ```bash
 # For Mac/Linux
@@ -47,7 +53,8 @@ openai
 python-dotenv
 ```
 
-These are the Python packages we'll use: `openai` for interacting with the OpenAI API and `python-dotenv` for loading our API key from an environment file.
+These are the Python packages we'll use: `openai` for interacting with the OpenAI API and `python-dotenv` for loading
+our API key from an environment file.
 
 Install the dependencies by running:
 
@@ -71,40 +78,47 @@ Create a Python script named `chat_gpt_terminal.py`. Open it in your code editor
 
 ```python
 import os
-import openai
+
 from dotenv import load_dotenv
+from openai import OpenAI
 
 # Load API key from .env file
 load_dotenv()
 api_key = os.getenv("OPENAI_API_KEY")
 
 # Initialize OpenAI client
-openai.api_key = api_key
+client = OpenAI(api_key=api_key)
+messages = []
+
 
 def chat_with_gpt(prompt):
-    response = openai.Completion.create(
-        engine="text-davinci-003",
-        prompt=prompt,
+    messages.append({"role": "user", "content": prompt})
+    response = client.chat.completions.create(
+        model="gpt-4",
+        messages=messages,
         max_tokens=150,
         n=1,
-        stop=None,
-        temperature=0.9,
+        temperature=0.5
     )
-    message = response.choices[0].text.strip()
-    return message
+    # Storing the response in the list of massages so the chat will remember what was said in the conversation before.
+    messages.append(response.choices[0].message)
+    return response.choices[0].message.content
+
 
 def main():
-    print("Welcome to the Terminal ChatGPT!")
+    print("Welcome to the Terminal ChatGPT, please enter exit if you had enough!")
     while True:
         user_input = input("You: ")
         if user_input.lower() == "exit":
             print("Goodbye!")
             break
-        response = chat_with_gpt(user_input)
-        print("GPT: ", response)
+        message = chat_with_gpt(user_input)
+        print(f"GPT: {message}")
+
 
 if __name__ == "__main__":
     main()
+
 ```
 
 ## Step 5: Running Your Application
@@ -115,12 +129,21 @@ In your terminal, run:
 python chat_gpt_terminal.py
 ```
 
-You'll now be able to interact with ChatGPT directly from your terminal. Type your questions or statements, and see how GPT responds. To exit, simply type `exit`.
+You'll now be able to interact with ChatGPT directly from your terminal.
+Type your questions or statements, and see how GPT responds.
+To exit, simply type `exit`.
 
 ## Where to Find the Final Code
 
-You can find the final code for this project at [https://github.com/Sokahr/terminal_chat_gpt](https://github.com/Sokahr/terminal_chat_gpt). Feel free to download, explore, and modify it as you wish.
+You can find the final code for this project at [https://github.com/Sokahr/terminal_chat_gpt](https://github.com/Sokahr/terminal_chat_gpt).
+Feel free to download, explore, and modify it as you wish.
 
 ## Conclusion
 
-Congratulations! You've just built your own streaming ChatGPT application for the terminal. This project not only gives you a direct line to one of the most powerful language models available but also serves as a great starting point for more complex projects. Whether you're interested in integrating ChatGPT into other applications, or simply exploring AI and natural language processing, the skills you've developed here will serve you well. Happy coding!
+Congratulations!
+You've just built your own ChatGPT application for the terminal. 
+This project not only gives you a direct line to one of the most powerful language models available
+but also serves as a great starting point for more complex projects. 
+Whether you're interested in integrating ChatGPT into other applications,
+or simply exploring AI and natural language processing, the skills you've developed here will serve you well. 
+Happy coding!
