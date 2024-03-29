@@ -1,10 +1,9 @@
-# Building a ChatGPT Terminal Application with Python
+# How to Build Your Own ChatGPT Terminal App: A Beginner's Guide
 
-Creating a ChatGPT terminal application allows you 
-to interact with the powerful capabilities of OpenAI's ChatGPT directly from your terminal, 
-no matter if you're on Mac, Linux, or Windows. 
-This blog post will guide you through the process of building this application, step by step.
-Whether you're a seasoned developer or just starting, you'll find these instructions easy to follow.
+Ever wanted to chat with AI directly from your command line,
+regardless of whether you're on a Mac, Linux, or Windows machine?
+This beginner-friendly guide will walk you through creating a ChatGPT terminal application, step by step.
+It's designed to be straightforward and easy to follow, even if you're just dipping your toes into coding.
 
 ## Prerequisites
 
@@ -13,7 +12,7 @@ Before we dive into the coding part, make sure you have the following:
 - A code editor of your choice.
 - An OpenAI API key. If you don't have one, you can get it by signing up at [OpenAI](https://openai.com/api/).
 
-## Step 1: Setting Up Your Project
+## Step 1: Kickstart Your Project
 
 First, create a new directory for your project. Open your terminal and run:
 
@@ -62,7 +61,7 @@ Install the dependencies by running:
 pip install -r requirements.txt
 ```
 
-## Step 3: Storing Your OpenAI API Key Securely
+## Step 3: Keeping Your API Key Safe
 
 Create a `.env` file in your project directory. Add your OpenAI API key like so:
 
